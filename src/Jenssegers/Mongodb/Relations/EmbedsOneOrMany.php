@@ -82,6 +82,7 @@ abstract class EmbedsOneOrMany extends Relation
     {
         foreach ($models as $model) {
             $results = $model->$relation()->getResults();
+            dd($results);
 
             $model->setParentRelation($this);
 
