@@ -4,9 +4,12 @@ namespace Jenssegers\Mongodb\Relations;
 
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Relations\HasMany as EloquentHasMany;
+use MongoDB\BSON\ObjectID;
 
 class HasMany extends EloquentHasMany
 {
+    use HasOneOrManyTrait;
+
     /**
      * Get the plain foreign key.
      *
