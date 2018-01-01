@@ -7,6 +7,7 @@ An Eloquent model and Query builder with support for MongoDB, using the original
 
 Table of contents
 -----------------
+* [Introduce](#introduce)
 * [Installation](#installation)
 * [Upgrading](#upgrading)
 * [Configuration](#configuration)
@@ -17,6 +18,12 @@ Table of contents
 * [Extensions](#extensions)
 * [Troubleshooting](#troubleshooting)
 * [Examples](#examples)
+
+Introduce
+---------
+This is modification version of `moloquent` is support these features:
+- $inheritConnection feature for relation query builder
+- You can make Eloquent Relation with ObjectID.
 
 Installation
 ------------
