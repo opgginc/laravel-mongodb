@@ -15,6 +15,14 @@ use Jenssegers\Mongodb\Relations\MorphTo;
 trait HybridRelations
 {
     /**
+     * Following the connection that defined on parent instance of this relation.
+     * But I didn't implemented at morph* functions because we don't need yet and don't have much time.
+     *
+     * @var bool
+     */
+    protected $inheritConnection = false;
+
+    /**
      * Define a one-to-one relationship.
      *
      * @param  string $related
@@ -31,7 +39,11 @@ trait HybridRelations
 
         $foreignKey = $foreignKey ?: $this->getForeignKey();
 
+        /** @var Model $instance */
         $instance = new $related;
+        if ($instance->inheritConnection === true) {
+            $instance->setConnection($this->getConnectionName());
+        }
 
         $localKey = $localKey ?: $this->getKeyName();
 
@@ -64,6 +76,7 @@ trait HybridRelations
         return new MorphOne($instance->newQuery(), $this, $type, $id, $localKey);
     }
 
+
     /**
      * Define a one-to-many relationship.
      *
@@ -81,7 +94,11 @@ trait HybridRelations
 
         $foreignKey = $foreignKey ?: $this->getForeignKey();
 
+        /** @var Model $instance */
         $instance = new $related;
+        if ($instance->inheritConnection === true) {
+            $instance->setConnection($this->getConnectionName());
+        }
 
         $localKey = $localKey ?: $this->getKeyName();
 
@@ -151,7 +168,11 @@ trait HybridRelations
             $foreignKey = Str::snake($relation) . '_id';
         }
 
+        /** @var Model $instance */
         $instance = new $related;
+        if ($instance->inheritConnection === true) {
+            $instance->setConnection($this->getConnectionName());
+        }
 
         // Once we have the foreign key names, we'll just create a new Eloquent query
         // for the related models and returns the relationship instance which will
@@ -253,7 +274,11 @@ trait HybridRelations
         // instances as well as the relationship instances we need for this.
         $foreignKey = $foreignKey ?: $this->getForeignKey() . 's';
 
+        /** @var Model $instance */
         $instance = new $related;
+        if ($instance->inheritConnection === true) {
+            $instance->setConnection($this->getConnectionName());
+        }
 
         $otherKey = $otherKey ?: $instance->getForeignKey() . 's';
 
